@@ -1,139 +1,112 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Flame, Dumbbell, Wheat, Droplets, Leaf } from "lucide-react"
-import type { MenuItem } from "@/lib/menu-data"
+import { Lightbulb, FlaskConical, Shirt } from "lucide-react"
 
-interface MenuCardProps {
-  item: MenuItem
-}
-
-export function MenuCard({ item }: MenuCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case "salada":
-        return "bg-primary text-primary-foreground"
-      case "dulce":
-        return "bg-accent text-accent-foreground"
-      case "smoothie":
-        return "bg-lab-mint text-foreground"
-      default:
-        return "bg-muted text-muted-foreground"
+export function SpaceRender() {
+  const designFeatures = [
+    {
+      icon: FlaskConical,
+      title: "Decoración Científica",
+      description: "Matraces, probetas y estructuras moleculares como elementos decorativos en las paredes y estantes."
+    },
+    {
+      icon: Lightbulb,
+      title: "Iluminación LED",
+      description: "Tiras LED en tonos blancos y verdes que simulan un ambiente de laboratorio moderno."
+    },
+    {
+      icon: Shirt,
+      title: "Uniformes Lab",
+      description: "Personal vestido con batas de laboratorio blancas y guantes negros, bordadas con el logo Crepa Lab."
     }
-  }
-
-  const getCategoryLabel = (category: string) => {
-    switch (category) {
-      case "salada":
-        return "Salada"
-      case "dulce":
-        return "Dulce"
-      case "smoothie":
-        return "Smoothie 500ml"
-      default:
-        return category
-    }
-  }
+  ]
 
   return (
-    <Card 
-      className="group overflow-hidden border-2 border-border hover:border-primary transition-all duration-300 cursor-pointer bg-card"
-      onClick={() => setIsExpanded(!isExpanded)}
-    >
-      <div className="relative h-48 overflow-hidden">
-        <Image
-          src={item.image || "/placeholder.svg"}
-          alt={item.name}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        <div className="absolute top-3 left-3 flex gap-2">
-          <Badge className={getCategoryColor(item.category)}>
-            {getCategoryLabel(item.category)}
+    <section className="py-12 md:py-20 bg-muted/50 -mx-4 md:-mx-8 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <Badge className="mb-4 bg-primary text-primary-foreground">
+            CONCEPTO DE ESPACIO
           </Badge>
-          {item.badge && (
-            <Badge variant="secondary" className="bg-card/90 text-foreground backdrop-blur-sm">
-              {item.badge}
-            </Badge>
-          )}
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            El Laboratorio
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Un espacio de 6m x 3m transformado en un laboratorio escolar donde la ciencia 
+            se encuentra con la nutrición. Ubicado en el área de comida de UVM.
+          </p>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/80 to-transparent p-4">
-          <div className="flex items-end justify-between">
-            <h3 className="text-xl font-bold text-card">{item.name}</h3>
-            <span className="text-2xl font-bold text-card">${item.price}</span>
+
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Render Image */}
+          <div className="relative rounded-xl overflow-hidden border-2 border-border shadow-lg">
+            <Image
+              src="/images/lab-interior-render.jpg"
+              alt="Render del interior de Crepa Lab"
+              width={800}
+              height={600}
+              className="w-full h-auto"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/90 to-transparent p-6">
+              <p className="text-card font-mono text-sm">
+                RENDER CONCEPTUAL • CREPA LAB UVM
+              </p>
+              <p className="text-card/80 text-xs mt-1">
+                Dimensiones: 6m (frente) × 3m (fondo) = 18m²
+              </p>
+            </div>
+          </div>
+
+          {/* Design Features */}
+          <div className="space-y-4">
+            {designFeatures.map((feature, index) => (
+              <Card key={index} className="border border-border hover:border-primary transition-colors">
+                <CardHeader className="pb-2">
+                  <CardTitle className="flex items-center gap-3 text-lg">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <feature.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    {feature.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Floor Plan Specs */}
+        <div className="mt-12 p-6 bg-card rounded-xl border-2 border-dashed border-primary/30">
+          <h3 className="font-mono text-sm text-primary mb-4 tracking-wider">
+            ESPECIFICACIONES TÉCNICAS DEL ESPACIO
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+              <p className="text-3xl font-bold text-foreground">6m</p>
+              <p className="text-xs text-muted-foreground font-mono">FRENTE</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-foreground">3m</p>
+              <p className="text-xs text-muted-foreground font-mono">FONDO</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-foreground">18m²</p>
+              <p className="text-xs text-muted-foreground font-mono">ÁREA TOTAL</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-foreground">2-3</p>
+              <p className="text-xs text-muted-foreground font-mono">OPERADORES</p>
+            </div>
           </div>
         </div>
       </div>
-      
-      <CardContent className="p-4 space-y-4">
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          {item.description}
-        </p>
-        
-        {/* Nutrition Facts - Always Visible */}
-        <div className="grid grid-cols-5 gap-2 p-3 bg-muted rounded-lg">
-          <div className="flex flex-col items-center text-center">
-            <Flame className="w-4 h-4 text-destructive mb-1" />
-            <span className="text-lg font-bold text-foreground">{item.calories}</span>
-            <span className="text-[10px] text-muted-foreground font-mono">KCAL</span>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <Dumbbell className="w-4 h-4 text-primary mb-1" />
-            <span className="text-lg font-bold text-foreground">{item.protein}g</span>
-            <span className="text-[10px] text-muted-foreground font-mono">PROT</span>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <Wheat className="w-4 h-4 text-accent mb-1" />
-            <span className="text-lg font-bold text-foreground">{item.carbs}g</span>
-            <span className="text-[10px] text-muted-foreground font-mono">CARB</span>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <Droplets className="w-4 h-4 text-lab-amber mb-1" />
-            <span className="text-lg font-bold text-foreground">{item.fat}g</span>
-            <span className="text-[10px] text-muted-foreground font-mono">GRAS</span>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <Leaf className="w-4 h-4 text-lab-green mb-1" />
-            <span className="text-lg font-bold text-foreground">{item.fiber}g</span>
-            <span className="text-[10px] text-muted-foreground font-mono">FIBRA</span>
-          </div>
-        </div>
-
-        {/* Ingredients - Expandable */}
-        <div 
-          className={`overflow-hidden transition-all duration-300 ${
-            isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <div className="pt-2 border-t border-border">
-            <h4 className="text-xs font-mono text-muted-foreground mb-2 tracking-wider">
-              FÓRMULA / INGREDIENTES
-            </h4>
-            <ul className="space-y-1">
-              {item.ingredients.map((ingredient, index) => (
-                <li 
-                  key={index}
-                  className="text-sm text-foreground flex items-start gap-2"
-                >
-                  <span className="text-primary font-mono text-xs mt-0.5">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  {ingredient}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <p className="text-xs text-center text-muted-foreground font-mono">
-          {isExpanded ? "▲ Clic para cerrar" : "▼ Clic para ver ingredientes"}
-        </p>
-      </CardContent>
-    </Card>
+    </section>
   )
 }

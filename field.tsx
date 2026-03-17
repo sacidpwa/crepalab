@@ -1,137 +1,66 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+'use client'
 
-@custom-variant dark (&:is(.dark *));
+import * as React from 'react'
+import * as TabsPrimitive from '@radix-ui/react-tabs'
 
-:root {
-  --background: oklch(0.98 0.005 145);
-  --foreground: oklch(0.18 0.02 145);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 145);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.02 145);
-  --primary: oklch(0.55 0.18 145);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.02 85);
-  --secondary-foreground: oklch(0.25 0.05 85);
-  --muted: oklch(0.95 0.01 145);
-  --muted-foreground: oklch(0.45 0.02 145);
-  --accent: oklch(0.65 0.15 85);
-  --accent-foreground: oklch(0.15 0.02 85);
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.88 0.02 145);
-  --input: oklch(0.92 0.01 145);
-  --ring: oklch(0.55 0.18 145);
-  --chart-1: oklch(0.55 0.18 145);
-  --chart-2: oklch(0.65 0.15 85);
-  --chart-3: oklch(0.50 0.12 200);
-  --chart-4: oklch(0.70 0.18 25);
-  --chart-5: oklch(0.60 0.20 320);
-  --radius: 0.75rem;
-  --sidebar: oklch(0.98 0.005 145);
-  --sidebar-foreground: oklch(0.18 0.02 145);
-  --sidebar-primary: oklch(0.55 0.18 145);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.95 0.02 145);
-  --sidebar-accent-foreground: oklch(0.18 0.02 145);
-  --sidebar-border: oklch(0.88 0.02 145);
-  --sidebar-ring: oklch(0.55 0.18 145);
-  --lab-green: oklch(0.55 0.18 145);
-  --lab-mint: oklch(0.85 0.08 165);
-  --lab-cream: oklch(0.95 0.02 85);
-  --lab-amber: oklch(0.65 0.15 85);
+import { cn } from '@/lib/utils'
+
+function Tabs({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Root>) {
+  return (
+    <TabsPrimitive.Root
+      data-slot="tabs"
+      className={cn('flex flex-col gap-2', className)}
+      {...props}
+    />
+  )
 }
 
-.dark {
-  --background: oklch(0.15 0.02 145);
-  --foreground: oklch(0.95 0.01 145);
-  --card: oklch(0.20 0.02 145);
-  --card-foreground: oklch(0.95 0.01 145);
-  --popover: oklch(0.20 0.02 145);
-  --popover-foreground: oklch(0.95 0.01 145);
-  --primary: oklch(0.65 0.18 145);
-  --primary-foreground: oklch(0.10 0.02 145);
-  --secondary: oklch(0.30 0.04 85);
-  --secondary-foreground: oklch(0.90 0.02 85);
-  --muted: oklch(0.25 0.02 145);
-  --muted-foreground: oklch(0.65 0.02 145);
-  --accent: oklch(0.55 0.12 85);
-  --accent-foreground: oklch(0.95 0.01 85);
-  --destructive: oklch(0.50 0.18 25);
-  --destructive-foreground: oklch(0.95 0.01 25);
-  --border: oklch(0.30 0.02 145);
-  --input: oklch(0.25 0.02 145);
-  --ring: oklch(0.65 0.18 145);
-  --chart-1: oklch(0.65 0.18 145);
-  --chart-2: oklch(0.55 0.12 85);
-  --chart-3: oklch(0.55 0.12 200);
-  --chart-4: oklch(0.65 0.15 25);
-  --chart-5: oklch(0.60 0.18 320);
-  --sidebar: oklch(0.18 0.02 145);
-  --sidebar-foreground: oklch(0.95 0.01 145);
-  --sidebar-primary: oklch(0.65 0.18 145);
-  --sidebar-primary-foreground: oklch(0.10 0.02 145);
-  --sidebar-accent: oklch(0.25 0.02 145);
-  --sidebar-accent-foreground: oklch(0.95 0.01 145);
-  --sidebar-border: oklch(0.30 0.02 145);
-  --sidebar-ring: oklch(0.65 0.18 145);
-  --lab-green: oklch(0.65 0.18 145);
-  --lab-mint: oklch(0.45 0.08 165);
-  --lab-cream: oklch(0.35 0.04 85);
-  --lab-amber: oklch(0.55 0.12 85);
+function TabsList({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.List>) {
+  return (
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      className={cn(
+        'bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]',
+        className,
+      )}
+      {...props}
+    />
+  )
 }
 
-@theme inline {
-  --font-sans: 'Space Grotesk', 'Space Grotesk Fallback';
-  --font-mono: 'JetBrains Mono', 'JetBrains Mono Fallback';
-  --color-lab-green: var(--lab-green);
-  --color-lab-mint: var(--lab-mint);
-  --color-lab-cream: var(--lab-cream);
-  --color-lab-amber: var(--lab-amber);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+function TabsTrigger({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+  return (
+    <TabsPrimitive.Trigger
+      data-slot="tabs-trigger"
+      className={cn(
+        "data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className,
+      )}
+      {...props}
+    />
+  )
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+function TabsContent({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Content>) {
+  return (
+    <TabsPrimitive.Content
+      data-slot="tabs-content"
+      className={cn('flex-1 outline-none', className)}
+      {...props}
+    />
+  )
 }
+
+export { Tabs, TabsList, TabsTrigger, TabsContent }
