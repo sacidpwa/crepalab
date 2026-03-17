@@ -1,26 +1,63 @@
-"use client"
+'use client'
 
-import Image from "next/image"
+import * as React from 'react'
+import * as SliderPrimitive from '@radix-ui/react-slider'
 
-export function Logo({ className = "" }: { className?: string }) {
+import { cn } from '@/lib/utils'
+
+function Slider({
+  className,
+  defaultValue,
+  value,
+  min = 0,
+  max = 100,
+  ...props
+}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+  const _values = React.useMemo(
+    () =>
+      Array.isArray(value)
+        ? value
+        : Array.isArray(defaultValue)
+          ? defaultValue
+          : [min, max],
+    [value, defaultValue, min, max],
+  )
+
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      <div className="relative w-12 h-12 md:w-16 md:h-16">
-        <Image
-          src="/images/crepa-lab-logo.jpg"
-          alt="Crepa Lab Logo"
-          fill
-          className="object-contain rounded-lg"
+    <SliderPrimitive.Root
+      data-slot="slider"
+      defaultValue={defaultValue}
+      value={value}
+      min={min}
+      max={max}
+      className={cn(
+        'relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
+        className,
+      )}
+      {...props}
+    >
+      <SliderPrimitive.Track
+        data-slot="slider-track"
+        className={
+          'bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5'
+        }
+      >
+        <SliderPrimitive.Range
+          data-slot="slider-range"
+          className={
+            'bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full'
+          }
         />
-      </div>
-      <div className="flex flex-col">
-        <span className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-          Crepa<span className="text-primary">Lab</span>
-        </span>
-        <span className="text-xs md:text-sm font-mono text-muted-foreground tracking-widest">
-          ESPECIALISTAS EN CREPAS
-        </span>
-      </div>
-    </div>
+      </SliderPrimitive.Track>
+      {Array.from({ length: _values.length }, (_, index) => (
+        <SliderPrimitive.Thumb
+          data-slot="slider-thumb"
+          key={index}
+          className="border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+        />
+      ))}
+    </SliderPrimitive.Root>
   )
 }
+
+export { Slider }

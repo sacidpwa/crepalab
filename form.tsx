@@ -1,143 +1,117 @@
-'use client'
+"use client"
 
-import * as React from 'react'
-import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { XIcon } from 'lucide-react'
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Wheat, Heart, Zap, Leaf } from "lucide-react"
+import { crepaBase } from "@/lib/menu-data"
 
-import { cn } from '@/lib/utils'
-
-function Dialog({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="dialog" {...props} />
-}
-
-function DialogTrigger({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
-  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
-}
-
-function DialogPortal({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Portal>) {
-  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
-}
-
-function DialogClose({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Close>) {
-  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
-}
-
-function DialogOverlay({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
+export function ConceptSection() {
   return (
-    <DialogPrimitive.Overlay
-      data-slot="dialog-overlay"
-      className={cn(
-        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50',
-        className,
-      )}
-      {...props}
-    />
-  )
-}
+    <section className="py-12 md:py-20">
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {/* Left - Concept */}
+        <div>
+          <Badge className="mb-4 bg-lab-mint text-foreground">
+            NUESTRA FÓRMULA
+          </Badge>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 text-balance">
+            Nutrición basada en ciencia, 
+            <span className="text-primary"> sabor sin compromisos</span>
+          </h2>
+          <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            En Crepa Lab combinamos ingredientes funcionales con técnicas culinarias 
+            para crear comida rápida que nutre tu cuerpo y satisface tu paladar. 
+            Cada receta es un experimento exitoso.
+          </p>
+          
+          <div className="space-y-4">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Wheat className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground">Harina Multigrano</h3>
+                <p className="text-sm text-muted-foreground">
+                  Linaza, ajonjolí y avena en cada crepa para fibra y omega-3.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+                <Heart className="w-5 h-5 text-accent" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground">Ingredientes Reales</h3>
+                <p className="text-sm text-muted-foreground">
+                  Sin conservadores artificiales. Queso panela, vegetales frescos y proteínas de calidad.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-lab-amber/20 flex items-center justify-center flex-shrink-0">
+                <Zap className="w-5 h-5 text-lab-amber" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground">Energía Sostenida</h3>
+                <p className="text-sm text-muted-foreground">
+                  Bajo índice glucémico para energía constante, ideal para estudiantes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-function DialogContent({
-  className,
-  children,
-  showCloseButton = true,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content> & {
-  showCloseButton?: boolean
-}) {
-  return (
-    <DialogPortal data-slot="dialog-portal">
-      <DialogOverlay />
-      <DialogPrimitive.Content
-        data-slot="dialog-content"
-        className={cn(
-          'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg',
-          className,
-        )}
-        {...props}
-      >
-        {children}
-        {showCloseButton && (
-          <DialogPrimitive.Close
-            data-slot="dialog-close"
-            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-          >
-            <XIcon />
-            <span className="sr-only">Close</span>
-          </DialogPrimitive.Close>
-        )}
-      </DialogPrimitive.Content>
-    </DialogPortal>
-  )
-}
+        {/* Right - Base Info */}
+        <Card className="border-2 border-primary/20 bg-gradient-to-br from-muted to-card">
+          <CardContent className="p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+                <Leaf className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-foreground">Base Multigrano</h3>
+                <p className="text-sm text-muted-foreground font-mono">FÓRMULA EXCLUSIVA</p>
+              </div>
+            </div>
+            
+            <p className="text-muted-foreground mb-6">
+              {crepaBase.description}
+            </p>
 
-function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="dialog-header"
-      className={cn('flex flex-col gap-2 text-center sm:text-left', className)}
-      {...props}
-    />
-  )
-}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div>
+                <h4 className="text-xs font-mono text-primary mb-2 tracking-wider">INGREDIENTES</h4>
+                <ul className="space-y-2">
+                  {crepaBase.ingredients.map((item, index) => (
+                    <li key={index} className="text-sm text-foreground flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-xs font-mono text-accent mb-2 tracking-wider">BENEFICIOS</h4>
+                <ul className="space-y-2">
+                  {crepaBase.benefits.map((item, index) => (
+                    <li key={index} className="text-sm text-foreground flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
-function DialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="dialog-footer"
-      className={cn(
-        'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end',
-        className,
-      )}
-      {...props}
-    />
+            <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+              <p className="text-xs text-center text-muted-foreground font-mono">
+                * Valores nutricionales calculados por porción estándar. 
+                Consulta con tu nutriólogo para requerimientos específicos.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </section>
   )
-}
-
-function DialogTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Title>) {
-  return (
-    <DialogPrimitive.Title
-      data-slot="dialog-title"
-      className={cn('text-lg leading-none font-semibold', className)}
-      {...props}
-    />
-  )
-}
-
-function DialogDescription({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Description>) {
-  return (
-    <DialogPrimitive.Description
-      data-slot="dialog-description"
-      className={cn('text-muted-foreground text-sm', className)}
-      {...props}
-    />
-  )
-}
-
-export {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-  DialogTrigger,
 }
